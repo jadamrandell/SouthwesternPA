@@ -1,0 +1,1214 @@
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
+:root {
+    --swpa-dark: #2b1d18;
+    --swpa-orange: #c45a34;
+    --swpa-light-bg: #ffffff;
+    --swpa-desert-bg: #f3ede6;
+}
+
+/* =========================================================
+   ADDITIONAL FONT STYLES
+   ========================================================= */
+@font-face {
+    font-family: 'SWPAHeaderFont';
+    src: url('ImagesThumbnails/WhatSoundPoundsNormal-R70o.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SWPASpecialFont';
+    src: url('ImagesThumbnails/Helldorado-eVrp.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* =========================================================
+   GLOBAL BASE
+   ========================================================= */
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #f7f7f9;
+    color: #222;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================================
+   HEADER SYSTEM
+   ========================================================= */
+
+/* ------------------------------
+   TOP WHITE BAR
+   ------------------------------ */
+.swpa-topbar {
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+    background: var(--swpa-light-bg);
+    color: var(--swpa-dark);
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+}
+
+.topbar-btn {
+    background: var(--swpa-orange);
+    color: #fff;
+    padding: 0.45rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.topbar-left {
+    font-family: Papyrus, fantasy;
+    letter-spacing: 0.03em;
+    font-size: 1.75rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE BANNER — FIXED BLENDING
+   ========================================================= */
+
+.swpa-banner {
+    position: relative;
+    width: calc(100% - 1rem);
+    margin-left: auto;
+    margin-right: 0;
+    height: 240px;
+
+border-left: 0.25px solid var(--swpa-dark);
+border-bottom: 1.5px solid var(--swpa-dark);
+border-top: 1.5px solid var(--swpa-dark);
+
+    overflow: visible;
+}
+
+.banner-img-left {
+    width: 35%;              /* or whatever width you want */
+    height: auto;
+    object-fit: cover;
+    object-position: left;
+    position: absolute;
+    z-index: 3;
+    left: 0;                 /* anchor to the left edge */
+    bottom: 0;
+}
+
+.banner-img {
+    width: 75%;              /* image occupies only the right quarter */
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    z-index: 1;
+    right: 0;                /* anchor image to the right edge */
+    top: 0;
+}
+
+.banner-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 2;   /* ← gradient stays BELOW both images */
+
+    background: linear-gradient(
+        130deg,
+        #2b1d18 10%,     /* dark */
+        #c45a34 55%,     /* orange */
+        transparent 75% /* fade into image */
+    );
+
+    mask-image: linear-gradient(135deg, black 0%, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(135deg, black 0%, black 70%, transparent 100%);
+
+    pointer-events: none;
+}
+
+/* ------------------------------
+   BOTTOM NAVIGATION BAR
+   ------------------------------ */
+.swpa-nav {
+    background: var(--swpa-light-bg);
+    padding: 1.5rem 1rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.swpa-nav > * {
+    width: calc(100% - 2rem);
+    margin-left: 2rem;
+}
+
+/* Hamburger */
+.menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    width: 28px;
+    height: 3px;
+    background: var(--swpa-dark);
+    border-radius: 2px;
+    position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: "";
+    width: 28px;
+    height: 3px;
+    background: var(--swpa-dark);
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+}
+
+.hamburger-icon::before { top: -8px; }
+.hamburger-icon::after { top: 8px; }
+
+/* Nav links */
+.nav-center {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-center a {
+    color: var(--swpa-dark);
+    text-decoration: none;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.nav-center a:hover {
+    color: var(--swpa-orange);
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: var(--swpa-dark);
+    list-style: none;
+    padding: 0.5rem 0;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    border: 1px solid var(--swpa-orange);
+    z-index: 999;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #fff;
+}
+
+.dropdown-menu li a:hover {
+    background: var(--swpa-orange);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Mobile nav */
+@media (max-width: 900px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-center {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 3rem;
+        padding-bottom: 1rem;
+    }
+
+    #menu-toggle:checked ~ .nav-center {
+        display: flex;
+    }
+}
+
+.swpa-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   HERO BANNER
+   ========================================================= */
+.swpa-hero-banner {
+    background: #ffffff;
+    color: var(--swpa-dark);
+    padding: 1rem 0;
+    border-top: 2px solid var(--swpa-dark);
+    border-bottom: 2px solid var(--swpa-dark);
+}
+
+.hero-inner {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.hero-message {
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.main-content {
+    padding-top: 370px; /* perfect for your header */
+}
+
+.main-inner {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cards */
+.event-card {
+    background: linear-gradient(135deg, var(--swpa-orange), var(--swpa-dark));
+    border: 2px solid var(--swpa-dark);
+    padding: 1rem;
+    border-radius: 6px;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+/* Base button */
+.btn {
+    display: inline-block;
+    padding: 0.9rem 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* Color themes */
+.btn.primary {
+    background: var(--swpa-dark);
+    color: #fff;
+}
+
+.btn.warning {
+    background: var(--swpa-orange);
+    color: #fff;
+}
+
+.btn.accent {
+    background: #8b4f2f;
+    color: #fff;
+}
+
+/* Hover effects */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   NEW ABOUT SECTION
+   ========================================================= */
+
+.swpa-about-section {
+    background: var(--swpa-orange);
+    color: #fff;
+    padding: 3rem 0;
+    border-bottom: 2px solid #000;
+}
+
+.about-grid {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.about-left h2,
+.about-left h3 {
+    color: var(--swpa-dark);
+}
+
+.about-left p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.about-right img {
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--swpa-orange);
+    border-radius: 6px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-right img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+
+/* =========================================================
+   AFFILIATES — CONSISTENT LOGO SIZING
+   ========================================================= */
+
+.affiliates {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.affiliates-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--swpa-dark);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.affiliates-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--swpa-dark);
+    padding-top: 1.5rem;
+}
+
+/* --- Uniform logo sizing --- */
+.affiliates-inner img {
+    width: 140px;          /* consistent visual footprint */
+    height: 80px;          /* consistent height */
+    object-fit: contain;   /* preserve aspect ratio */
+    background: #fff;      /* optional: clean background */
+    padding: 6px;          /* optional: prevents cramped logos */
+    border-radius: 4px;    /* optional: subtle polish */
+    border: 2px solid var(--swpa-dark);
+    opacity: 0.95;
+    transition: opacity 0.2s ease;
+}
+
+.affiliates-inner img:hover {
+    opacity: 1;
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 600px) {
+    .affiliates-inner img {
+        width: 120px;
+        height: 70px;
+    }
+}
+
+/* =========================================================
+   ROTATING MESSAGE
+   ========================================================= */
+
+.swpa-message-rotator {
+    width: 100%;
+    height: 40vh;
+    min-height: 450px;
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border-top: 2px solid var(--swpa-dark);
+    border-bottom: 2px solid var(--swpa-dark);
+}
+
+.swpa-message-rotator::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('ImagesThumbnails/swpawatermark.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    background-position: top left;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.message-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 5; /* added */
+}
+.message-slide.active {
+    opacity: 1;
+}
+
+/* image wrapper + fade */
+.message-img-wrap {
+    width: 40%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
+    z-index: 1;
+    position: relative;
+}
+}
+
+.message-img-wrap::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 8%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, white);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.message-text {
+    width: 60%;
+    padding: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--swpa-dark);
+    display: flex;
+    flex-direction: column;   /* ← THIS stacks text + button */
+    justify-content: center;
+    align-items: center;      /* ← center-align text + button */
+    gap: 1.2rem;              /* ← spacing between text and button */
+    z-index: 2;
+}
+
+
+/* arrows */
+.rotator-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: var(--swpa-dark);
+    cursor: pointer;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    user-select: none;
+    transition: opacity 0.3s ease;
+}
+
+.rotator-prev { left: 1rem; }
+.rotator-next { right: 1rem; }
+
+.rotator-arrow:hover { opacity: 0.6; }
+
+/* dots */
+.rotator-dots {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    z-index: 10;
+}
+
+.rotator-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--swpa-dark);
+    opacity: 0.4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.rotator-dot.active {
+    opacity: 1;
+}
+
+.rotator-btn {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    padding: 0.9rem 1.6rem;
+    display: inline-block;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+    background: var(--swpa-dark);
+    color: #fff;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;   /* two columns */
+    align-items: flex-start;           /* icons stay at the top */
+    text-align: center;                /* center text inside left column */
+}
+
+.footer-links p {
+    margin: 0.25rem 0;
+    line-height: 1.2;
+}
+
+
+.footer-links {
+    flex: 1;                           /* takes up left column */
+    display: flex;
+    flex-direction: column;
+    align-items: center;               /* center each link */
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;         /* push icons outward */
+    align-items: flex-start;           /* align icons at top */
+    flex: 0 0 auto;                    /* keep icons tight */
+    margin-right: 1rem;                /* optional: push further right */
+}
+
+
+
+@media (max-width: 900px) {
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.85;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+.icon.fb { background-image: url('ImagesThumbnails/FBLogo.png'); }
+.icon.ig { background-image: url('ImagesThumbnails/Insta.png'); }
+.icon.x  { background-image: url('ImagesThumbnails/XLogo.png'); }
+.icon.yt { background-image: url('ImagesThumbnails/YT.png'); }
+
+.footer-copyright {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* =========================================================
+   VIDEO BACKGROUND SECTION
+   ========================================================= */
+
+.swpa-video-section {
+    position: relative;
+    width: 100%;
+    height: 55vh;
+    min-height: 400px;
+    overflow: hidden;
+    border-top: 2px solid var(--swpa-dark);
+    border-bottom: 2px solid var(--swpa-dark);
+}
+
+.video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Dark overlay for readability */
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 2;
+}
+
+/* Content centered over video */
+.video-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+.video-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+/* Buttons */
+.video-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.video-btn {
+    background: var(--swpa-orange);
+    color: #fff;
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.video-btn:hover {
+    background: var(--swpa-dark);
+    transform: translateY(-4px);
+}
+
+/* Mobile layout */
+@media (max-width: 900px) {
+    .video-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .video-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* =========================================================
+   CONVENTION HERO (Ken Burns Banner)
+   ========================================================= */
+
+.convention-hero {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* adjust to taste */
+    min-height: 450px;
+    overflow: hidden;
+}
+
+/* Background image with Ken Burns effect */
+
+/* Orange fade on the right */
+.convention-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0) 0%,          /* left side: no darkening */
+        rgba(0,0,0,0) 50%,         /* middle: still transparent */
+        rgba(196,90,52,0.4) 65%,   /* SWPA orange begins */
+        rgba(196,90,52,0.7) 80%,   /* stronger orange */
+        rgba(196,90,52,1.0) 100%   /* fully opaque orange */
+    );
+    opacity: 0.65;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Text overlay */
+.convention-hero-text {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    color: var(--swpa-dark);
+    z-index: 5;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.convention-hero-text h1 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem 0;
+    font-family: 'SWPAHeaderFont', serif; /* your new font */
+}
+
+.convention-hero-text h2,
+.convention-hero-text h3 {
+    font-size: 1.8rem;
+    margin: 0.25rem 0;
+    font-family: 'SWPAHeaderFont', serif; /* your new font */
+}
+
+
+.convention-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fills the hero area */
+    z-index: 1;          /* behind overlay + text */
+}
+
+/* =========================================================
+   CONVENTION COLLAPSIBLE SECTIONS — UPDATED
+   ========================================================= */
+
+.convention-collapse {
+    width: 100%;
+    background: #fff; /* full white background */
+    margin: 2rem 0;
+    border: 2px solid var(--swpa-dark);
+    border-radius: 6px;
+}
+
+/* Header button */
+.collapse-toggle {
+    width: 100%;
+    background: #fff;
+    color: var(--swpa-dark);
+    padding: 1.2rem 1.5rem;
+    font-size: 1.8rem;
+    font-family: 'SWPAHeaderFont', serif; /* your new font */
+    font-weight: 700;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; /* pushes plus sign to right */
+    align-items: center;
+    border-bottom: 2px solid var(--swpa-dark);
+}
+
+/* Plus/minus icon */
+.collapse-icon {
+    font-weight: 700;
+    color: var(--swpa-orange);
+    margin-left: auto;
+    padding-left: 1rem;
+    letter-spacing: 0.03em;
+}
+
+/* Collapsible content */
+.collapse-content {
+    display: none;
+    background: #fff; /* white background inside */
+    padding: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Three-column grid */
+.reg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+/* Registration cards */
+.reg-card {
+    background: #fff;
+    border-top: 2px solid var(--swpa-dark);
+    border-bottom: 2px solid var(--swpa-dark);
+    padding: 1rem;
+}
+
+.reg-card h3 {
+    font-family: 'SWPAHeaderFont', serif;
+    color: var(--swpa-orange);
+    margin-top: 0;
+}
+
+@media (max-width: 900px) {
+    .reg-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Full-width registration button */
+.reg-fullwidth-btn {
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid var(--swpa-dark);
+    border-bottom: 2px solid var(--swpa-dark);
+    margin-top: 2rem;
+    padding: 1.2rem 0;
+    text-align: center;
+}
+
+.reg-link {
+    display: block;
+    width: 100%;
+    font-family: 'SWPAHeaderFont', serif; /* your new font */
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--swpa-orange);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.reg-link:hover {
+    color: var(--swpa-dark);
+    background: var(--swpa-desert-bg);
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NEWSLETTER PAGE
+   ========================================================= */
+
+/* ------------------------------
+   HERO
+------------------------------ */
+.newsletter-hero {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.newsletter-hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter-title {
+    font-size: 2.4rem;
+    color: var(--swpa-dark);
+    margin-bottom: 0.5rem;
+}
+
+.newsletter-subtitle {
+    font-size: 1.2rem;
+    color: var(--swpa-orange);
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-current-btn {
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+/* ------------------------------
+   MAIN LAYOUT (Sidebar + Content)
+------------------------------ */
+.newsletter-layout {
+    display: grid;
+    grid-template-columns: 280px auto;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ------------------------------
+   SIDEBAR
+------------------------------ */
+.newsletter-sidebar {
+    background: var(--swpa-desert-bg);
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.newsletter-sidebar h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
+    color: var(--swpa-dark);
+}
+
+/* Base list reset */
+.newsletter-menu,
+.newsletter-decade-volumes,
+.newsletter-issues {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ------------------------------
+   DECADE ACCORDION
+------------------------------ */
+.newsletter-decade {
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-decade-toggle {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--swpa-dark);
+    cursor: pointer;
+}
+
+.newsletter-decade-toggle:hover {
+    color: var(--swpa-orange);
+}
+
+.newsletter-decade-volumes {
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.newsletter-decade.open .newsletter-decade-volumes {
+    display: block;
+}
+
+/* ------------------------------
+   VOLUME ACCORDION
+------------------------------ */
+.newsletter-volume {
+    margin-bottom: 1rem;
+}
+
+.newsletter-volume-toggle {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--swpa-dark);
+    cursor: pointer;
+}
+
+.newsletter-volume-toggle:hover {
+    color: var(--swpa-orange);
+}
+
+.newsletter-issues {
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.newsletter-volume.open .newsletter-issues {
+    display: block;
+}
+
+.newsletter-issues a {
+    color: var(--swpa-dark);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.newsletter-issues a:hover {
+    color: var(--swpa-orange);
+}
+
+/* ------------------------------
+   MAIN CONTENT AREA
+------------------------------ */
+.newsletter-main {
+    padding: 1rem;
+}
+
+/* ABOUT SECTION (right of sidebar) */
+.newsletter-about {
+    margin-bottom: 2rem;
+}
+
+/* ------------------------------
+   TWO-COLUMN SECTION (Features + Editor)
+------------------------------ */
+.newsletter-two-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+/* Left column: Featured Sections */
+.newsletter-features-col ul.newsletter-features {
+    padding-left: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Right column: Editor Info */
+.newsletter-editor-col {
+    padding-left: 1rem;
+    text-align: center;
+}
+
+.newsletter-editor-img {
+    width: 220px;
+    border-radius: 12px;
+    border: 3px solid var(--swpa-dark);
+    margin-bottom: 1rem;
+}
+
+.newsletter-editor-btn {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    padding: 0.9rem 1.6rem;
+}
+
+/* Editor two-column layout */
+.editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.editor-text {
+    text-align: left;
+}
+
+.editor-image {
+    text-align: right;
+}
+
+.editor-image img {
+    width: 220px;
+    border-radius: 12px;
+    border: 3px solid var(--swpa-dark);
+}
+
+
+
+/* ---------------------------------------------------------------
+                     SWPA 2027 Speakers
+--------------------------------------------------------------- */
+
+/* Divider label between hero and rotating presenters */
+.speaker-divider {
+    width: 100%;
+    padding: 1.5rem 0;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--swpa-light-bg);
+    border-top: 3px solid var(--swpa-dark);
+    border-bottom: 3px solid var(--swpa-dark);
+}
+
+.speaker-divider h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'SWPAHeaderFont', serif;
+    color: var(--swpa-dark);
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+/* ------------------------------
+   MOBILE
+------------------------------ */
+@media (max-width: 900px) {
+
+    .newsletter-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .newsletter-sidebar {
+        order: 2;
+    }
+
+    .newsletter-main {
+        order: 1;
+    }
+
+    .newsletter-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .newsletter-editor-col {
+        border-top: 2px solid var(--swpa-dark);
+        margin-top: 2rem;
+        padding-top: 2rem;
+    }
+}
